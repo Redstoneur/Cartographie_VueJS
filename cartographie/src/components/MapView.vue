@@ -15,24 +15,6 @@ export default {
       center: [2.3522, 48.8566], // Centre de Paris
       zoom: 12,
     });
-
-    // Ajouter les données à la carte
-    this.map.on("load", () => {
-      this.map.addSource("points", {
-        type: "geojson",
-        data: "url_vers_votre_fichier_geojson",
-      });
-
-      this.map.addLayer({
-        id: "points",
-        type: "circle",
-        source: "points",
-        paint: {
-          "circle-color": "#007cbf",
-          "circle-radius": 8,
-        },
-      });
-    });
   },
 };
 </script>
