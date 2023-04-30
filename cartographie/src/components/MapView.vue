@@ -35,7 +35,7 @@ const defaultZoom = 5.5
 export default {
     mounted() {
         // Créer la carte en utilisant l'API de Mapbox GL
-        mapboxgl.accessToken = "pk.eyJ1IjoicmVkc3RvbmV1ciIsImEiOiJjbGgzcXFyb20wZHRyM3RvNTMwYnB1cG80In0.AwqUWkH1EUY6e75fDnpnLw";
+        mapboxgl.accessToken = "token" // todo: add token
         this.map = new mapboxgl.Map({
             container: "map",
             style: "mapbox://styles/mapbox/streets-v11",
