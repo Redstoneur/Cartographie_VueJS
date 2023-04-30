@@ -31,6 +31,10 @@ import data from "../../Dataset/dataset.json";
 const FranceCenter = [2.2137, 46.2276] // Centre de la France
 //const ParisCenter [2.3522, 48.8566] // Centre de Paris
 const defaultZoom = 5.5
+const defaultColor = '#ff0000'
+
+const selectedPointZoom = 10
+const selectedPointColor = '#0000ff'
 
 export default {
     mounted() {
@@ -58,13 +62,14 @@ export default {
                 source: 'points',
                 paint: {
                     'circle-radius': 8,
-                    'circle-color': '#ff0000'
+                    'circle-color': defaultColor,
                 }
             });
         });
 
         // Ajouter un popup pour afficher les informations des points
         this.map.on('click', 'points', function (e) {
+            console.log(e.features[0]);
 
             let node = e.features[0].properties.node;
             let indicateur1 = e.features[0].properties.indicateur_1;
@@ -81,6 +86,32 @@ export default {
 
             let info = document.getElementById('info');
             info.innerHTML = popupContent;
+
+            // Centrer la carte sur le point sélectionné
+            this.flyTo({
+                center: e.features[0].geometry.coordinates.slice(),
+                zoom: selectedPointZoom,
+                bearing: 0,
+                pitch: 0,
+                speed: 0.5,
+                curve: 1
+            });
+
+            // Rotation de la carte
+            this.once('moveend', function () {
+                this.rotateTo(0, {
+                    duration: 2000
+                });
+            });
+
+            // changer la couleur du point sélectionné repéré par son properties.node
+            this.setPaintProperty('points', 'circle-color', [
+                'match',
+                ['get', 'node'],
+                node,
+                selectedPointColor,
+                defaultColor
+            ]);
         });
 
         // Changer le curseur de la souris lorsqu'elle survole les points
@@ -116,6 +147,9 @@ export default {
                         duration: 2000
                     });
                 });
+
+                // Réinitialiser la couleur des points
+                this.setPaintProperty('points', 'circle-color', defaultColor);
             }
         });
     },
