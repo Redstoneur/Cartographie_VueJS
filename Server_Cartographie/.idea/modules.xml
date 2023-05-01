@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Cartographie_Python_DataSet.iml" filepath="$PROJECT_DIR$/.idea/Cartographie_Python_DataSet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Server_Cartographie.iml" filepath="$PROJECT_DIR$/.idea/Server_Cartographie.iml" />
     </modules>
   </component>
 </project>

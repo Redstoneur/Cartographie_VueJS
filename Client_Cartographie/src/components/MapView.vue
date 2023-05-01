@@ -25,8 +25,9 @@
 
 <script>
 import mapboxgl from "mapbox-gl";
+import axios from 'axios';
 
-import data from "../../Dataset/dataset.json";
+import data from "../../Dataset/datasetSimple.json";
 
 const FranceCenter = [2.2137, 46.2276] // Centre de la France
 //const ParisCenter [2.3522, 48.8566] // Centre de Paris
@@ -35,6 +36,25 @@ const defaultColor = '#ff0000'
 
 const selectedPointZoom = 10
 const selectedPointColor = '#0000ff'
+
+async function getData() {
+
+    const res = await axios.get('http://127.0.0.1:8000/geojson')
+        .then(response => {
+            // Do something with the response data
+            console.log("response: " + response)
+            console.log("response.data: " + response.data)
+            return response.data
+        })
+        .catch(error => {
+            // Handle the error
+            console.log("error: " + error)
+            return null
+        });
+
+    console.log("res: " + res)
+    return res
+}
 
 export default {
     mounted() {
@@ -47,6 +67,9 @@ export default {
             zoom: defaultZoom,
             attributionControl: false
         });
+
+        const ApiData = getData()
+        console.log("ApiData: " + ApiData)
 
         // Ajouter les données à la carte
         this.map.on("load", () => {
