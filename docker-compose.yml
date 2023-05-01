@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./Client_Cartographie
+    ports:
+      - "8080:80"
+    environment:
+      - mapboxgl_Token=your_token
+    networks:
+      - app-network
+
+  api:
+    build: ./Server_Cartographie
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge

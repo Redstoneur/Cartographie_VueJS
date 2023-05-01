@@ -39,7 +39,7 @@ const selectedPointColor = '#0000ff'
 export default {
     mounted() {
         // Créer la carte en utilisant l'API de Mapbox GL
-        mapboxgl.accessToken = "token" // todo: add token
+        mapboxgl.accessToken = "token"; // todo: add token
         this.map = new mapboxgl.Map({
             container: "map",
             style: "mapbox://styles/mapbox/streets-v11",
